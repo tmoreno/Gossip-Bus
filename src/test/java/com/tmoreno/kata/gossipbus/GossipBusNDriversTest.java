@@ -15,6 +15,7 @@ public class GossipBusNDriversTest {
 	private static final Integer[] BILL_ROUTE = { 2, 3, 6, 4 };
 	private static final Integer[] JAMES_ROUTE = { 2, 3, 4, 5, 1 };
 	private static final Integer[] COLIN_ROUTES = { 1, 3, 4, 5 };
+	private static final Integer[] LAURA_ROUTES = { 3, 2, 1, 4 };
 
 	@Before
 	public void setUp() {
@@ -31,5 +32,17 @@ public class GossipBusNDriversTest {
 		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("1", numStops);
+	}
+
+	@Test
+	public void whenAllDriversAreAtLastStopReturnRouteLength() {
+		routes.addDriverRoute(MIKE_ROUTE);
+		routes.addDriverRoute(BILL_ROUTE);
+		routes.addDriverRoute(LAURA_ROUTES);
+
+		gossipBus = new GossipBus(routes);
+		numStops = gossipBus.calcNumStops();
+
+		Assert.assertEquals("4", numStops);
 	}
 }
