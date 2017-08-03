@@ -57,4 +57,20 @@ public class GossipBusNDriversTest {
 
 		Assert.assertEquals("5", numStops);
 	}
+
+	@Test
+	public void kataExample1() {
+		Integer[] driver1 = { 3, 1, 2, 3 };
+		Integer[] driver2 = { 3, 2, 3, 1 };
+		Integer[] driver3 = { 4, 2, 3, 4, 5 };
+
+		routes.addDriverRoute(driver1);
+		routes.addDriverRoute(driver2);
+		routes.addDriverRoute(driver3);
+
+		gossipBus = new GossipBus(routes);
+		numStops = gossipBus.calcNumStops();
+
+		Assert.assertEquals("5", numStops);
+	}
 }
