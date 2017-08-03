@@ -34,7 +34,7 @@ public class GossipBus {
 		while (numStops <= 480) {
 			driversStop = routes.nextDriversStop();
 
-			if (driversStop.get(0).equals(driversStop.get(1))) {
+			if (sameStop(driversStop)) {
 				break;
 			}
 
@@ -42,6 +42,16 @@ public class GossipBus {
 		}
 
 		return numStops;
+	}
+
+	private boolean sameStop(List<Integer> driversStop) {
+		for (int i = 0; i < driversStop.size() - 1; i++) {
+			if (!driversStop.get(0).equals(driversStop.get(1))) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }
