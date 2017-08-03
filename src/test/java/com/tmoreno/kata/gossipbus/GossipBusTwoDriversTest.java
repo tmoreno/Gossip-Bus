@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GossipBusTest {
+public class GossipBusTwoDriversTest {
 
 	private GossipBus gossipBus;
 
@@ -15,15 +15,6 @@ public class GossipBusTest {
 	@Before
 	public void setUp() {
 		gossipBus = new GossipBus();
-	}
-
-	@Test
-	public void whenOneDriverReturnNever() {
-		gossipBus.addDriverRoute(MIKE_ROUTE);
-
-		String numStops = gossipBus.calcNumStops();
-
-		Assert.assertEquals("never", numStops);
 	}
 
 	@Test
