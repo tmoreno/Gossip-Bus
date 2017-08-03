@@ -31,8 +31,15 @@ public class GossipBus {
 		Integer[] routeDriverA = routes.get(0);
 		Integer[] routeDriverB = routes.get(1);
 
-		if (routeDriverA[0].equals(routeDriverB[0])) {
-			return 1;
+		int i = 0;
+		for (; i < routeDriverA.length; i++) {
+			if (routeDriverA[i].equals(routeDriverB[i])) {
+				break;
+			}
+		}
+
+		if (i <= routeDriverA.length) {
+			return i + 1;
 		}
 		else {
 			return 0;
