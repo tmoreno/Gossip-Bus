@@ -6,6 +6,8 @@ import org.junit.Test;
 
 public class GossipBusTwoDriversTest {
 
+	private String numStops;
+	private Routes routes;
 	private GossipBus gossipBus;
 
 	private static final Integer[] MIKE_ROUTE = { 1, 2, 3, 4 };
@@ -15,45 +17,49 @@ public class GossipBusTwoDriversTest {
 
 	@Before
 	public void setUp() {
-		gossipBus = new GossipBus();
+		routes = new Routes();
 	}
 
 	@Test
 	public void whenTwoDriversJoinAtFirstStopReturnOne() {
-		gossipBus.addDriverRoute(MIKE_ROUTE);
-		gossipBus.addDriverRoute(PETER_ROUTE);
+		routes.addDriverRoute(MIKE_ROUTE);
+		routes.addDriverRoute(PETER_ROUTE);
 
-		String numStops = gossipBus.calcNumStops();
+		gossipBus = new GossipBus(routes);
+		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("1", numStops);
 	}
 
 	@Test
 	public void whenTwoDriversJoinAtLastStopReturnRouteLength() {
-		gossipBus.addDriverRoute(MIKE_ROUTE);
-		gossipBus.addDriverRoute(BILL_ROUTE);
+		routes.addDriverRoute(MIKE_ROUTE);
+		routes.addDriverRoute(BILL_ROUTE);
 
-		String numStops = gossipBus.calcNumStops();
+		gossipBus = new GossipBus(routes);
+		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("4", numStops);
 	}
 
 	@Test
 	public void whenTwoDriversNeverJoinReturnNever() {
-		gossipBus.addDriverRoute(PETER_ROUTE);
-		gossipBus.addDriverRoute(BILL_ROUTE);
+		routes.addDriverRoute(PETER_ROUTE);
+		routes.addDriverRoute(BILL_ROUTE);
 
-		String numStops = gossipBus.calcNumStops();
+		gossipBus = new GossipBus(routes);
+		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("never", numStops);
 	}
 
 	@Test
 	public void whenTwoDriversJoinAfterALoopLongestRouteLength() {
-		gossipBus.addDriverRoute(MIKE_ROUTE);
-		gossipBus.addDriverRoute(JAMES_ROUTE);
+		routes.addDriverRoute(MIKE_ROUTE);
+		routes.addDriverRoute(JAMES_ROUTE);
 
-		String numStops = gossipBus.calcNumStops();
+		gossipBus = new GossipBus(routes);
+		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("5", numStops);
 	}

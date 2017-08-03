@@ -6,20 +6,23 @@ import org.junit.Test;
 
 public class GossipBusOneDriverTest {
 
+	private String numStops;
+	private Routes routes;
 	private GossipBus gossipBus;
 
 	private static final Integer[] MIKE_ROUTE = { 1, 2, 3, 4 };
 
 	@Before
 	public void setUp() {
-		gossipBus = new GossipBus();
+		routes = new Routes();
 	}
 
 	@Test
 	public void whenOneDriverReturnNever() {
-		gossipBus.addDriverRoute(MIKE_ROUTE);
+		routes.addDriverRoute(MIKE_ROUTE);
 
-		String numStops = gossipBus.calcNumStops();
+		gossipBus = new GossipBus(routes);
+		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("never", numStops);
 	}

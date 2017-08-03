@@ -1,14 +1,12 @@
 package com.tmoreno.kata.gossipbus;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class GossipBus {
 
-	private List<Integer[]> routes;
+	private Routes routes;
 
-	public GossipBus() {
-		routes = new ArrayList<Integer[]>();
+	public GossipBus(Routes routes) {
+		this.routes = routes;
 	}
 
 	public String calcNumStops() {
@@ -47,10 +45,6 @@ public class GossipBus {
 		}
 
 		return numStops;
-	}
-
-	public void addDriverRoute(Integer[] route) {
-		routes.add(route);
 	}
 
 }
