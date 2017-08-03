@@ -16,15 +16,26 @@ public class GossipBus {
 			return "never";
 		}
 		else {
-			Integer[] routeDriverA = routes.get(0);
-			Integer[] routeDriverB = routes.get(1);
+			int numStops = calcStops();
 
-			if (routeDriverA[0].equals(routeDriverB[0])) {
-				return "1";
-			}
-			else {
+			if (numStops == 0) {
 				return "never";
 			}
+			else {
+				return numStops + "";
+			}
+		}
+	}
+
+	private int calcStops() {
+		Integer[] routeDriverA = routes.get(0);
+		Integer[] routeDriverB = routes.get(1);
+
+		if (routeDriverA[0].equals(routeDriverB[0])) {
+			return 1;
+		}
+		else {
+			return 0;
 		}
 	}
 
