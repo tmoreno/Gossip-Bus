@@ -38,7 +38,7 @@ public class GossipBus {
 			}
 		}
 
-		if (i <= routeDriverA.length) {
+		if (i < routeDriverA.length) {
 			return i + 1;
 		}
 		else {

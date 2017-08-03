@@ -10,7 +10,7 @@ public class GossipBusTest {
 
 	private static final Integer[] MIKE_ROUTE = { 1, 2, 3, 4 };
 	private static final Integer[] PETER_ROUTE = { 1, 4, 5, 6 };
-	private static final Integer[] BILL_ROUTE = { 2, 3, 5, 4 };
+	private static final Integer[] BILL_ROUTE = { 2, 3, 6, 4 };
 
 	@Before
 	public void setUp() {
@@ -44,6 +44,16 @@ public class GossipBusTest {
 		String numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("4", numStops);
+	}
+
+	@Test
+	public void whenTwoDriversNeverJoinReturnNever() {
+		gossipBus.addDriverRoute(PETER_ROUTE);
+		gossipBus.addDriverRoute(BILL_ROUTE);
+
+		String numStops = gossipBus.calcNumStops();
+
+		Assert.assertEquals("never", numStops);
 	}
 
 }
