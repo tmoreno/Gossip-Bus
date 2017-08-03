@@ -5,8 +5,8 @@ import org.junit.Test;
 
 public class GossipBusTest {
 
-	private static final int[] MIKE_ROUTE = { 1, 2, 3, 4 };
-	private static final int[] PETER_ROUTE = { 1, 4, 5, 6 };
+	private static final Integer[] MIKE_ROUTE = { 1, 2, 3, 4 };
+	private static final Integer[] PETER_ROUTE = { 1, 4, 5, 6 };
 
 	@Test
 	public void whenOneDriverReturnNever() {
