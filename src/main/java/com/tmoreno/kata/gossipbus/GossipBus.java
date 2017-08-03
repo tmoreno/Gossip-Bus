@@ -18,7 +18,7 @@ public class GossipBus {
 		else {
 			int numStops = calcStops();
 
-			if (numStops == 0) {
+			if (numStops > 480) {
 				return "never";
 			}
 			else {
@@ -32,18 +32,21 @@ public class GossipBus {
 		Integer[] routeDriverB = routes.get(1);
 
 		int i = 0;
-		for (; i < routeDriverA.length; i++) {
-			if (routeDriverA[i].equals(routeDriverB[i])) {
+		int j = 0;
+		int numStops = 1;
+
+		while (numStops <= 480) {
+			if (routeDriverA[i].equals(routeDriverB[j])) {
 				break;
 			}
+
+			i = (i + 1) % routeDriverA.length;
+			j = (j + 1) % routeDriverB.length;
+
+			numStops++;
 		}
 
-		if (i < routeDriverA.length) {
-			return i + 1;
-		}
-		else {
-			return 0;
-		}
+		return numStops;
 	}
 
 	public void addDriverRoute(Integer[] route) {
