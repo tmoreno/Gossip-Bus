@@ -1,5 +1,6 @@
 package com.tmoreno.kata.gossipbus;
 
+import java.util.List;
 
 public class GossipBus {
 
@@ -26,20 +27,16 @@ public class GossipBus {
 	}
 
 	private int calcStops() {
-		Integer[] routeDriverA = routes.get(0);
-		Integer[] routeDriverB = routes.get(1);
+		List<Integer> driversStop;
 
-		int i = 0;
-		int j = 0;
 		int numStops = 1;
 
 		while (numStops <= 480) {
-			if (routeDriverA[i].equals(routeDriverB[j])) {
+			driversStop = routes.nextDriversStop();
+
+			if (driversStop.get(0).equals(driversStop.get(1))) {
 				break;
 			}
-
-			i = (i + 1) % routeDriverA.length;
-			j = (j + 1) % routeDriverB.length;
 
 			numStops++;
 		}
