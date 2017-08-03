@@ -45,4 +45,16 @@ public class GossipBusNDriversTest {
 
 		Assert.assertEquals("4", numStops);
 	}
+
+	@Test
+	public void whenDriversJoinAfterALoopLongestRouteLength() {
+		routes.addDriverRoute(MIKE_ROUTE);
+		routes.addDriverRoute(PETER_ROUTE);
+		routes.addDriverRoute(JAMES_ROUTE);
+
+		gossipBus = new GossipBus(routes);
+		numStops = gossipBus.calcNumStops();
+
+		Assert.assertEquals("5", numStops);
+	}
 }
