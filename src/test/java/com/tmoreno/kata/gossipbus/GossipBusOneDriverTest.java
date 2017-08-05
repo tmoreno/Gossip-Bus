@@ -7,21 +7,22 @@ import org.junit.Test;
 public class GossipBusOneDriverTest {
 
 	private String numStops;
-	private Routes routes;
+	private Driver mike;
 	private GossipBus gossipBus;
 
-	private static final Integer[] MIKE_ROUTE = { 1, 2, 3, 4 };
+	private static final int[] MIKE_ROUTE = { 1, 2, 3, 4 };
 
 	@Before
 	public void setUp() {
-		routes = new Routes();
+		mike = new Driver(MIKE_ROUTE);
+
+		gossipBus = new GossipBus();
 	}
 
 	@Test
 	public void whenOneDriverReturnNever() {
-		routes.addDriverRoute(MIKE_ROUTE);
+		gossipBus.addDriver(mike);
 
-		gossipBus = new GossipBus(routes);
 		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("never", numStops);
