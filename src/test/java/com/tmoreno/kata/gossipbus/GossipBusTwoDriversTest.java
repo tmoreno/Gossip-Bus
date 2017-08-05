@@ -20,10 +20,10 @@ public class GossipBusTwoDriversTest {
 
 	@Before
 	public void setUp() {
-		mike = new Driver(MIKE_ROUTE);
-		peter = new Driver(PETER_ROUTE);
-		bill = new Driver(BILL_ROUTE);
-		james = new Driver(JAMES_ROUTE);
+		mike = new Driver("mike", MIKE_ROUTE);
+		peter = new Driver("peter", PETER_ROUTE);
+		bill = new Driver("bill", BILL_ROUTE);
+		james = new Driver("james", JAMES_ROUTE);
 
 		gossipBus = new GossipBus();
 	}
@@ -71,10 +71,10 @@ public class GossipBusTwoDriversTest {
 	@Test
 	public void kataExample2() {
 		int[] driver1Route = { 2, 1, 2 };
-		Driver driver1 = new Driver(driver1Route);
+		Driver driver1 = new Driver("driver1", driver1Route);
 
 		int[] driver2Route = { 5, 2, 8 };
-		Driver driver2 = new Driver(driver2Route);
+		Driver driver2 = new Driver("driver2", driver2Route);
 
 		gossipBus.addDriver(driver1);
 		gossipBus.addDriver(driver2);

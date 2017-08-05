@@ -10,12 +10,6 @@ public class Driver {
 	private int currentStopPosition;
 	private Set<String> gossipsKnowed;
 
-	public Driver(int[] route) {
-		this.route = route;
-
-		currentStopPosition = 0;
-	}
-
 	public Driver(String name, int[] route) {
 		this.name = name;
 		this.route = route;

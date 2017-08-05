@@ -24,12 +24,12 @@ public class GossipBusNDriversTest {
 
 	@Before
 	public void setUp() {
-		mike = new Driver(MIKE_ROUTE);
-		peter = new Driver(PETER_ROUTE);
-		bill = new Driver(BILL_ROUTE);
-		james = new Driver(JAMES_ROUTE);
-		colin = new Driver(COLIN_ROUTES);
-		laura = new Driver(LAURA_ROUTES);
+		mike = new Driver("mike", MIKE_ROUTE);
+		peter = new Driver("peter", PETER_ROUTE);
+		bill = new Driver("bill", BILL_ROUTE);
+		james = new Driver("james", JAMES_ROUTE);
+		colin = new Driver("colin", COLIN_ROUTES);
+		laura = new Driver("laura", LAURA_ROUTES);
 
 		gossipBus = new GossipBus();
 	}
@@ -70,15 +70,15 @@ public class GossipBusNDriversTest {
 	@Test
 	public void kataExample1() {
 		int[] driver1Route = { 3, 1, 2, 3 };
-		Driver driver1 = new Driver(driver1Route);
+		Driver driver1 = new Driver("driver1", driver1Route);
 		gossipBus.addDriver(driver1);
 
 		int[] driver2Route = { 3, 2, 3, 1 };
-		Driver driver2 = new Driver(driver2Route);
+		Driver driver2 = new Driver("driver2", driver2Route);
 		gossipBus.addDriver(driver2);
 
 		int[] driver3Route = { 4, 2, 3, 4, 5 };
-		Driver driver3 = new Driver(driver3Route);
+		Driver driver3 = new Driver("driver3", driver3Route);
 		gossipBus.addDriver(driver3);
 
 		numStops = gossipBus.calcNumStops();

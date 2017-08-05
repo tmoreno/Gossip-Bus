@@ -14,7 +14,7 @@ public class GossipBusOneDriverTest {
 
 	@Before
 	public void setUp() {
-		mike = new Driver(MIKE_ROUTE);
+		mike = new Driver("mike", MIKE_ROUTE);
 
 		gossipBus = new GossipBus();
 	}

@@ -15,7 +15,7 @@ public class DriverTest {
 
 	@Before
 	public void setUp() {
-		driver = new Driver(route);
+		driver = new Driver("mike", route);
 	}
 
 	@Test
