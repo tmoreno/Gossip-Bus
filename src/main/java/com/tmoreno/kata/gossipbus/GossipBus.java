@@ -32,9 +32,10 @@ public class GossipBus {
 	}
 
 	private int calcStops() {
-		int numStops = 1;
 		Driver driver1;
 		Driver driver2;
+
+		int numStops = 1;
 
 		while (numStops <= 480) {
 			for (int i = 0; i < drivers.size(); i++) {
@@ -45,16 +46,16 @@ public class GossipBus {
 
 				if (driver1.getStop() == driver2.getStop()) {
 					driver1.shareGossips(driver2);
-
-					if (driversKnowAllGossips()) {
-						return numStops;
-					}
 				}
 			}
 
-			moveDriversToNextStop();
-
-			numStops++;
+			if (driversKnowAllGossips()) {
+				break;
+			}
+			else {
+				moveDriversToNextStop();
+				numStops++;
+			}
 		}
 
 		return numStops;
