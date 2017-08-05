@@ -47,8 +47,6 @@ public class GossipBus {
 		int numStops = 1;
 
 		while (numStops <= 480) {
-			moveDriversToNextStop();
-
 			for (int i = 0; i < drivers.size(); i++) {
 				int j = (i + 1) % drivers.size();
 
@@ -60,6 +58,8 @@ public class GossipBus {
 					}
 				}
 			}
+
+			moveDriversToNextStop();
 
 			numStops++;
 		}
