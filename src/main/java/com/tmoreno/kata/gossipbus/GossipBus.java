@@ -1,5 +1,6 @@
 package com.tmoreno.kata.gossipbus;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -8,25 +9,26 @@ import java.util.Set;
 
 public class GossipBus {
 
-	private Routes routes;
+	private List<Driver> drivers;
 	private Map<Integer, Set<Integer>> driversGossipsKnowed;
 
-	public GossipBus(Routes routes) {
-		this.routes = routes;
+	public GossipBus() {
+		drivers = new ArrayList<Driver>();
 
 		driversGossipsKnowed = new HashMap<>();
+	}
 
-		HashSet<Integer> driverGossipsKnowed;
-		for (int i = 0; i < routes.size(); i++) {
-			driverGossipsKnowed = new HashSet<Integer>();
-			driverGossipsKnowed.add(i);
+	public void addDriver(Driver driver) {
+		drivers.add(driver);
 
-			driversGossipsKnowed.put(i, driverGossipsKnowed);
-		}
+		Set<Integer> driverGossipsKnowed = new HashSet<Integer>();
+		driverGossipsKnowed.add(drivers.size() - 1);
+
+		driversGossipsKnowed.put(drivers.size() - 1, driverGossipsKnowed);
 	}
 
 	public String calcNumStops() {
-		if (routes.size() <= 1) {
+		if (drivers.size() <= 1) {
 			return "never";
 		}
 		else {
@@ -42,17 +44,15 @@ public class GossipBus {
 	}
 
 	private int calcStops() {
-		List<Integer> driversStop;
-
 		int numStops = 1;
 
 		while (numStops <= 480) {
-			driversStop = routes.nextDriversStop();
+			moveDriversToNextStop();
 
-			for (int i = 0; i < driversStop.size(); i++) {
-				int j = (i + 1) % driversStop.size();
+			for (int i = 0; i < drivers.size(); i++) {
+				int j = (i + 1) % drivers.size();
 
-				if (driversStop.get(i).equals(driversStop.get(j))) {
+				if (drivers.get(i).getStop() == drivers.get(j).getStop()) {
 					shareGossips(i, j);
 
 					if (driversKnowAllGossips()) {
@@ -65,6 +65,12 @@ public class GossipBus {
 		}
 
 		return numStops;
+	}
+
+	private void moveDriversToNextStop() {
+		for (Driver driver : drivers) {
+			driver.goToNextStop();
+		}
 	}
 
 	private void shareGossips(int i, int j) {
