@@ -33,13 +33,18 @@ public class GossipBus {
 
 	private int calcStops() {
 		int numStops = 1;
+		Driver driver1;
+		Driver driver2;
 
 		while (numStops <= 480) {
 			for (int i = 0; i < drivers.size(); i++) {
 				int j = (i + 1) % drivers.size();
 
-				if (drivers.get(i).getStop() == drivers.get(j).getStop()) {
-					drivers.get(i).shareGossips(drivers.get(j));
+				driver1 = drivers.get(i);
+				driver2 = drivers.get(j);
+
+				if (driver1.getStop() == driver2.getStop()) {
+					driver1.shareGossips(driver2);
 
 					if (driversKnowAllGossips()) {
 						return numStops;
