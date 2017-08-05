@@ -7,25 +7,32 @@ import org.junit.Test;
 public class GossipBusTwoDriversTest {
 
 	private String numStops;
-	private Routes routes;
+	private Driver mike;
+	private Driver peter;
+	private Driver bill;
+	private Driver james;
 	private GossipBus gossipBus;
 
-	private static final Integer[] MIKE_ROUTE = { 1, 2, 3, 4 };
-	private static final Integer[] PETER_ROUTE = { 1, 4, 5, 6 };
-	private static final Integer[] BILL_ROUTE = { 2, 3, 6, 4 };
-	private static final Integer[] JAMES_ROUTE = { 2, 3, 4, 5, 1 };
+	private static final int[] MIKE_ROUTE = { 1, 2, 3, 4 };
+	private static final int[] PETER_ROUTE = { 1, 4, 5, 6 };
+	private static final int[] BILL_ROUTE = { 2, 3, 6, 4 };
+	private static final int[] JAMES_ROUTE = { 2, 3, 4, 5, 1 };
 
 	@Before
 	public void setUp() {
-		routes = new Routes();
+		mike = new Driver(MIKE_ROUTE);
+		peter = new Driver(PETER_ROUTE);
+		bill = new Driver(BILL_ROUTE);
+		james = new Driver(JAMES_ROUTE);
+
+		gossipBus = new GossipBus();
 	}
 
 	@Test
 	public void whenTwoDriversJoinAtFirstStopReturnOne() {
-		routes.addDriverRoute(MIKE_ROUTE);
-		routes.addDriverRoute(PETER_ROUTE);
+		gossipBus.addDriver(mike);
+		gossipBus.addDriver(peter);
 
-		gossipBus = new GossipBus(routes);
 		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("1", numStops);
@@ -33,10 +40,9 @@ public class GossipBusTwoDriversTest {
 
 	@Test
 	public void whenTwoDriversJoinAtLastStopReturnRouteLength() {
-		routes.addDriverRoute(MIKE_ROUTE);
-		routes.addDriverRoute(BILL_ROUTE);
+		gossipBus.addDriver(mike);
+		gossipBus.addDriver(bill);
 
-		gossipBus = new GossipBus(routes);
 		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("4", numStops);
@@ -44,10 +50,9 @@ public class GossipBusTwoDriversTest {
 
 	@Test
 	public void whenTwoDriversNeverJoinReturnNever() {
-		routes.addDriverRoute(PETER_ROUTE);
-		routes.addDriverRoute(BILL_ROUTE);
+		gossipBus.addDriver(peter);
+		gossipBus.addDriver(bill);
 
-		gossipBus = new GossipBus(routes);
 		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("never", numStops);
@@ -55,10 +60,9 @@ public class GossipBusTwoDriversTest {
 
 	@Test
 	public void whenTwoDriversJoinAfterALoopLongestRouteLength() {
-		routes.addDriverRoute(MIKE_ROUTE);
-		routes.addDriverRoute(JAMES_ROUTE);
+		gossipBus.addDriver(mike);
+		gossipBus.addDriver(james);
 
-		gossipBus = new GossipBus(routes);
 		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("5", numStops);
@@ -66,13 +70,15 @@ public class GossipBusTwoDriversTest {
 
 	@Test
 	public void kataExample2() {
-		Integer[] driver1 = { 2, 1, 2 };
-		Integer[] driver2 = { 5, 2, 8 };
+		int[] driver1Route = { 2, 1, 2 };
+		Driver driver1 = new Driver(driver1Route);
 
-		routes.addDriverRoute(driver1);
-		routes.addDriverRoute(driver2);
+		int[] driver2Route = { 5, 2, 8 };
+		Driver driver2 = new Driver(driver2Route);
 
-		gossipBus = new GossipBus(routes);
+		gossipBus.addDriver(driver1);
+		gossipBus.addDriver(driver2);
+
 		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("never", numStops);
