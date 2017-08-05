@@ -1,20 +1,27 @@
 package com.tmoreno.kata.gossipbus;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class GossipBus {
 
 	private Routes routes;
-	private Map<Integer, Integer> driverGossipsKnowed;
+	private Map<Integer, Set<Integer>> driversGossipsKnowed;
 
 	public GossipBus(Routes routes) {
 		this.routes = routes;
 
-		driverGossipsKnowed = new HashMap<Integer, Integer>();
+		driversGossipsKnowed = new HashMap<>();
+
+		HashSet<Integer> driverGossipsKnowed;
 		for (int i = 0; i < routes.size(); i++) {
-			driverGossipsKnowed.put(i, 1);
+			driverGossipsKnowed = new HashSet<Integer>();
+			driverGossipsKnowed.add(i);
+
+			driversGossipsKnowed.put(i, driverGossipsKnowed);
 		}
 	}
 
@@ -46,8 +53,7 @@ public class GossipBus {
 				int j = (i + 1) % driversStop.size();
 
 				if (driversStop.get(i).equals(driversStop.get(j))) {
-					driverGossipsKnowed.put(i, driverGossipsKnowed.get(i) + 1);
-					driverGossipsKnowed.put(j, driverGossipsKnowed.get(j) + 1);
+					shareGossips(i, j);
 
 					if (driversKnowAllGossips()) {
 						return numStops;
@@ -61,13 +67,25 @@ public class GossipBus {
 		return numStops;
 	}
 
+	private void shareGossips(int i, int j) {
+		Set<Integer> sharedGossips = new HashSet<Integer>();
+		Set<Integer> driver1Gossips = driversGossipsKnowed.get(i);
+		Set<Integer> driver2Gossips = driversGossipsKnowed.get(j);
+
+		sharedGossips.addAll(driver1Gossips);
+		sharedGossips.addAll(driver2Gossips);
+
+		driversGossipsKnowed.put(i, sharedGossips);
+		driversGossipsKnowed.put(j, sharedGossips);
+	}
+
 	private boolean driversKnowAllGossips() {
 		int numDriversKnowAllGossips = 0;
 
-		int gossipsNumber = driverGossipsKnowed.size();
+		int gossipsNumber = driversGossipsKnowed.size();
 
-		for (Integer numberGossipsKnowByDriver : driverGossipsKnowed.values()) {
-			if (numberGossipsKnowByDriver.intValue() >= gossipsNumber) {
+		for (Set<Integer> driverGossipsKnowed : driversGossipsKnowed.values()) {
+			if (driverGossipsKnowed.size() == gossipsNumber) {
 				numDriversKnowAllGossips++;
 			}
 		}
