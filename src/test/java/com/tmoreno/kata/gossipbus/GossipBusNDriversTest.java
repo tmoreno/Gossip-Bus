@@ -69,17 +69,9 @@ public class GossipBusNDriversTest {
 
 	@Test
 	public void kataExample1() {
-		int[] driver1Route = { 3, 1, 2, 3 };
-		Driver driver1 = new Driver("driver1", driver1Route);
-		gossipBus.addDriver(driver1);
-
-		int[] driver2Route = { 3, 2, 3, 1 };
-		Driver driver2 = new Driver("driver2", driver2Route);
-		gossipBus.addDriver(driver2);
-
-		int[] driver3Route = { 4, 2, 3, 4, 5 };
-		Driver driver3 = new Driver("driver3", driver3Route);
-		gossipBus.addDriver(driver3);
+		gossipBus.addDriver(createDriver("driver1", 3, 1, 2, 3));
+		gossipBus.addDriver(createDriver("driver2", 3, 2, 3, 1));
+		gossipBus.addDriver(createDriver("driver3", 4, 2, 3, 4, 5));
 
 		numStops = gossipBus.calcNumStops();
 
@@ -88,36 +80,20 @@ public class GossipBusNDriversTest {
 
 	@Test
 	public void kataExample2() {
-		int[] driver1Route = { 7, 11, 2, 2, 4, 8, 2, 2 };
-		Driver driver1 = new Driver("driver1", driver1Route);
-		gossipBus.addDriver(driver1);
-
-		int[] driver2Route = { 3, 0, 11, 8 };
-		Driver driver2 = new Driver("driver2", driver2Route);
-		gossipBus.addDriver(driver2);
-
-		int[] driver3Route = { 5, 11, 8, 10, 3, 11 };
-		Driver driver3 = new Driver("driver3", driver3Route);
-		gossipBus.addDriver(driver3);
-
-		int[] driver4Route = { 5, 9, 2, 5, 0, 3 };
-		Driver driver4 = new Driver("driver4", driver4Route);
-		gossipBus.addDriver(driver4);
-
-		int[] driver5Route = { 7, 4, 8, 2, 8, 1, 0, 5 };
-		Driver driver5 = new Driver("driver5", driver5Route);
-		gossipBus.addDriver(driver5);
-
-		int[] driver6Route = { 3, 6, 8, 9 };
-		Driver driver6 = new Driver("driver6", driver6Route);
-		gossipBus.addDriver(driver6);
-
-		int[] driver7Route = { 4, 2, 11, 3, 3 };
-		Driver driver7 = new Driver("driver7", driver7Route);
-		gossipBus.addDriver(driver7);
+		gossipBus.addDriver(createDriver("driver1", 7, 11, 2, 2, 4, 8, 2, 2));
+		gossipBus.addDriver(createDriver("driver2", 3, 0, 11, 8));
+		gossipBus.addDriver(createDriver("driver3", 5, 11, 8, 10, 3, 11));
+		gossipBus.addDriver(createDriver("driver4", 5, 9, 2, 5, 0, 3));
+		gossipBus.addDriver(createDriver("driver5", 7, 4, 8, 2, 8, 1, 0, 5));
+		gossipBus.addDriver(createDriver("driver6", 3, 6, 8, 9));
+		gossipBus.addDriver(createDriver("driver7", 4, 2, 11, 3, 3));
 
 		numStops = gossipBus.calcNumStops();
 
 		Assert.assertEquals("9", numStops);
+	}
+
+	private Driver createDriver(String name, int... route) {
+		return new Driver(name, route);
 	}
 }
