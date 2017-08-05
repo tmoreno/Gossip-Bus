@@ -5,6 +5,8 @@ import java.util.List;
 
 public class GossipBus {
 
+	private static final int MAX_STOPS_IN_A_WORKING_DAY = 480;
+
 	private List<Driver> drivers;
 
 	public GossipBus() {
@@ -22,7 +24,7 @@ public class GossipBus {
 		else {
 			int numStops = 1;
 
-			while (numStops <= 480) {
+			while (numStops <= MAX_STOPS_IN_A_WORKING_DAY) {
 				shareGossips();
 
 				if (driversKnowAllGossips()) {
@@ -75,7 +77,7 @@ public class GossipBus {
 	}
 
 	private String formatResult(int numStops) {
-		if (numStops > 480) {
+		if (numStops > MAX_STOPS_IN_A_WORKING_DAY) {
 			return "never";
 		}
 		else {
