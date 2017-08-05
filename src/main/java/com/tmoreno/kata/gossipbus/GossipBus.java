@@ -20,33 +20,22 @@ public class GossipBus {
 			return "never";
 		}
 		else {
-			int numStops = calcStops();
+			int numStops = 1;
 
-			if (numStops > 480) {
-				return "never";
+			while (numStops <= 480) {
+				shareGossips();
+
+				if (driversKnowAllGossips()) {
+					break;
+				}
+				else {
+					moveDriversToNextStop();
+					numStops++;
+				}
 			}
-			else {
-				return numStops + "";
-			}
+
+			return formatResult(numStops);
 		}
-	}
-
-	private int calcStops() {
-		int numStops = 1;
-
-		while (numStops <= 480) {
-			shareGossips();
-
-			if (driversKnowAllGossips()) {
-				break;
-			}
-			else {
-				moveDriversToNextStop();
-				numStops++;
-			}
-		}
-
-		return numStops;
 	}
 
 	private void shareGossips() {
@@ -83,6 +72,15 @@ public class GossipBus {
 		}
 
 		return numDriversKnowAllGossips == gossipsNumber;
+	}
+
+	private String formatResult(int numStops) {
+		if (numStops > 480) {
+			return "never";
+		}
+		else {
+			return numStops + "";
+		}
 	}
 
 }
