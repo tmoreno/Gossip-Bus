@@ -45,14 +45,16 @@ public class GossipBus {
 		Driver driver2;
 
 		for (int i = 0; i < drivers.size(); i++) {
-			int j = (i + 1) % drivers.size();
+			for (int j = i + 1; j < drivers.size(); j++) {
+				driver1 = drivers.get(i);
+				driver2 = drivers.get(j);
 
-			driver1 = drivers.get(i);
-			driver2 = drivers.get(j);
+				if (driver1.getStop() == driver2.getStop()) {
+					driver1.shareGossips(driver2);
+				}
 
-			if (driver1.getStop() == driver2.getStop()) {
-				driver1.shareGossips(driver2);
 			}
+
 		}
 	}
 
