@@ -64,4 +64,18 @@ public class GossipBusTwoDriversTest {
 		Assert.assertEquals("5", numStops);
 	}
 
+	@Test
+	public void kataExample2() {
+		Integer[] driver1 = { 2, 1, 2 };
+		Integer[] driver2 = { 5, 2, 8 };
+
+		routes.addDriverRoute(driver1);
+		routes.addDriverRoute(driver2);
+
+		gossipBus = new GossipBus(routes);
+		numStops = gossipBus.calcNumStops();
+
+		Assert.assertEquals("never", numStops);
+	}
+
 }
